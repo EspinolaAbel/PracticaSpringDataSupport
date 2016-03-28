@@ -24,4 +24,8 @@
 		<property name="maxTotal" value="5"/>
 </bean>
 
+<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" scope="prototype">
+	<property name="dataSource" ref="dataSource"/> 
+</bean>
+
 </beans>

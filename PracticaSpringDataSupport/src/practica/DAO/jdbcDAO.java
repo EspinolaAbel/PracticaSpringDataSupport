@@ -1,13 +1,13 @@
 package practica.DAO;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 import practica.model.Circle;
 
@@ -15,15 +15,28 @@ public class jdbcDAO {
 	
 	@Autowired
 	private DataSource dataSource;
-
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
+	
 	public DataSource getDataSource() {
 		return dataSource;
 	}
+	
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
+
+
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+
 
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 
+	
 	public Circle getCircle(Integer idCircle) {
 		Connection conn = null;
 		
@@ -62,5 +75,9 @@ public class jdbcDAO {
 			}
 			catch(Exception e) {}
 		}
+	}
+	
+	public Integer getNumberOfRows() {
+		return jdbcTemplate.queryForObject("SELECT COUNT(*) FROM  circle", Integer.class);
 	}
 }

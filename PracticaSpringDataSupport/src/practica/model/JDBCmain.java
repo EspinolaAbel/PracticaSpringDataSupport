@@ -15,6 +15,8 @@ public class JDBCmain {
 		Circle circle = j.getCircle(1);
 		 
 		 System.out.println(circle.getName());
+		 
+		 System.out.println("Cantidad de filas en la tabla: "+ j.getNumberOfRows());
 	}
 
 }
