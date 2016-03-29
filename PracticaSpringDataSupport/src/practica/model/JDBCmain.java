@@ -17,6 +17,18 @@ public class JDBCmain {
 		 System.out.println(circle.getName());
 		 
 		 System.out.println("Cantidad de filas en la tabla: "+ j.getNumberOfRows());
+		 
+		 System.out.println("Nombre del círculo con id igual a 1: " + j.getCircleName(1));
+		 
+		 System.out.println();
+		 System.out.println("Todos los circulos:");
+		 for(Circle c: j.getListOfCircles())
+			 System.out.println("Circulo "+c.getId()+" con nombre "+c.getName());
+		 
+//		 j.createTableTriangle();
+//		 
+//		 j.insert(100, "A houndred circle");
+
 	}
 
 }
