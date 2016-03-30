@@ -11,6 +11,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import practica.model.Circle;
 
@@ -20,6 +23,8 @@ public class jdbcDAO {
 	private DataSource dataSource;
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	@Autowired
+	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 	
 	public DataSource getDataSource() {
 		return dataSource;
@@ -99,10 +104,18 @@ public class jdbcDAO {
 		return jdbcTemplate.query(sql, new CircleMapper());
 	}
 	
+//	public void insert(Integer id, String name) {
+//		String sql = "INSERT INTO circle VALUES(?, ?)";
+////		El método update me sirve tanto para insertar como para borrar filas.
+//		jdbcTemplate.update(sql, new Object[] {id, name});
+//	}
+
 	public void insert(Integer id, String name) {
-		String sql = "INSERT INTO circle VALUES(?, ?)";
-//		El método update me sirve tanto para insertar como para borrar filas.
-		jdbcTemplate.update(sql, new Object[] {id, name});
+		String sql = "INSERT INTO circle VALUES( :id , :name )";
+		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+		namedParameters.addValue("id", id);
+		namedParameters.addValue("name", name);
+		namedParameterJdbcTemplate.update(sql, namedParameters);
 	}
 	
 	public void createTableTriangle() {

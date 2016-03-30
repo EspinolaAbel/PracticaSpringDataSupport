@@ -28,6 +28,8 @@ public class JDBCmain {
 //		 j.createTableTriangle();
 //		 
 //		 j.insert(100, "A houndred circle");
+		 
+//		 j.insert(5, "Fifth circle");
 
 	}
 
