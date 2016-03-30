@@ -106,10 +106,14 @@ public class jdbcDAO {
 	
 //	public void insert(Integer id, String name) {
 //		String sql = "INSERT INTO circle VALUES(?, ?)";
-////		El mÈtodo update me sirve tanto para insertar como para borrar filas.
+////		El m√©todo update me sirve tanto para insertar como para borrar filas.
 //		jdbcTemplate.update(sql, new Object[] {id, name});
 //	}
 
+	/** Insertando una tupla con NamedParameterJdbcTemplate
+	A diferencia de jdbcTemplate, con NamedParameterJdbcTemplate se puede asignar parametros
+	en una query utilizando nombres de par√°metros en vez de ?.
+	*/
 	public void insert(Integer id, String name) {
 		String sql = "INSERT INTO circle VALUES( :id , :name )";
 		MapSqlParameterSource namedParameters = new MapSqlParameterSource();
@@ -124,7 +128,7 @@ public class jdbcDAO {
 	}
 	
 
-	/** CircleMapper es una clase interna y privada de jdbcDAO. Tiene como funciÛn realizar el mapeo entre la tabla circle
+	/** CircleMapper es una clase interna y privada de jdbcDAO. Tiene como funci√≥n realizar el mapeo entre la tabla circle
 	 * de la base de datos y la clase Circle, implementado en este proyecto.*/
 	private static final class CircleMapper implements RowMapper<Circle> {
 
